@@ -1,1 +1,7 @@
-[{"name":"Ned Stark","phone":"123-456-7890","email":"ned@winterfell.com","address":"Winterfell Castle, The North, Westeros","note":"Likes long walks on the beach"},{"name":"jim","phone":"555-555-5555","email":"jim@bob.com","address":"123 here st, there, nowhere, usa","note":"is a fatty"},{"name":"test","phone":"123-456-7890","email":"testy@testson.com","address":"here and there","note":"wazzup>?"}]
+[{
+  "name": "Joe Blow",
+  "phone": "(555) 555-5555",
+  "email": "joe@blow.com",
+  "address": "123 here ave, there, idaho, usa",
+  "note": "cheesy feet"
+}]

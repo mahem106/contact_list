@@ -21,7 +21,6 @@ var snap = angular.module('snuffles', []);
         url: '/list'
       })
       .then(function(res) {
-        console.log('res: ', res);
         $scope.contacts = res.data;
       }, function(err) {
         console.error('error: ', err);
@@ -37,9 +36,12 @@ var snap = angular.module('snuffles', []);
     };
 
     $scope.delContact = function(contact) {
-      console.log('del');
-        $scope.contacts.splice(this.$index, 1);
-
+      var delIndex = this.$index;
+      $http({
+        method: 'DELETE',
+        url: `/list/${delIndex}`,
+      });
+        $scope.contacts.splice(delIndex, 1);
     }
 
 
@@ -49,5 +51,6 @@ var snap = angular.module('snuffles', []);
       })
     };
 
+    // $scope.editContact()
 
 });

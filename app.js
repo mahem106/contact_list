@@ -48,15 +48,22 @@ app.post('/list', function(req, res) {
   })
 })
 
-app.put('/list', function (req, res) {
+// app.put('/list/:index', function (req, res) {
+//   fs.readFile(listFilename, function(err, data) {
+//     var list = JSON.parse(data);
+//     res.send('PUT request to homepage');
+// });
 
-  res.send('PUT request to homepage');
-});
-
-app.delete('/list', function (req, res) {
-
-  res.send('DELETE request to homepage');
-});
+app.delete('/list/:index', function (req, res) {
+  fs.readFile(listFilename, function(err, data) {
+    var list = JSON.parse(data);
+    list.splice(req.params.index, 1);
+    fs.writeFile(listFilename, JSON.stringify(list), function(err) {
+      console.error(err);
+      res.end();
+    });
+  })
+})
 
 var server = http.createServer(app);
 

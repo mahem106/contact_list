@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var http = require('http');
 var path = require('path');
+var uuid = require('uuid');
 
 var app = express();
 
@@ -40,7 +41,9 @@ app.get('/list', function(req, res) {
 app.post('/list', function(req, res) {
   fs.readFile(listFilename, function(err, data) {
     var list = JSON.parse(data);
-    list.push(req.body);
+    var newContact = req.body;
+    newContact.id = uuid.v1();
+    list.push(newContact);
   fs.writeFile(listFilename, JSON.stringify(list), function(err) {
     console.error(err);
     res.end();
@@ -48,16 +51,30 @@ app.post('/list', function(req, res) {
   })
 })
 
-// app.put('/list/:index', function (req, res) {
-//   fs.readFile(listFilename, function(err, data) {
-//     var list = JSON.parse(data);
-//     res.send('PUT request to homepage');
-// });
-
-app.delete('/list/:index', function (req, res) {
+app.put('/list/:index', function (req, res) {
+  var editedContact = req.body;
   fs.readFile(listFilename, function(err, data) {
     var list = JSON.parse(data);
-    list.splice(req.params.index, 1);
+    var contact = list.find(function(obj) {
+      return obj.id === id;
+    });
+      contact.name = editedContact.name;
+      contact.phone = editedContact.phone;
+      contact.email = editedContact.email;
+      contact.address = editedContact.address;
+      contact.note = editedContact.note;
+    list.push(editedContact);
+  });
+});
+
+app.delete('/list/:id', function (req, res) {
+  var id = req.params.id;
+  fs.readFile(listFilename, function(err, data) {
+    var list = JSON.parse(data);
+    var contact = list.find(function(obj) {
+      return obj.id === id;
+    });
+    list.splice(contact, 1);
     fs.writeFile(listFilename, JSON.stringify(list), function(err) {
       console.error(err);
       res.end();

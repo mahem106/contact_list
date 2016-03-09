@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact List</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link rel="stylesheet" href="style.css">
+ <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+ <script src="main.js"></script>
+
+</head>
+<body ng-app='snuffles' ng-controller='mainCtrl'>
+  <div class="container">
+    <div class="divider"></div>
+    <h4 for="add" class='left'>Contacts</h4>
+    <a id="add" class="waves-effect waves-light btn modal-trigger1 right" href="#modal1">Add Contact</a>
+    <div class="divider"></div>
+    <table class="responsive-table highlight bordered z-depth-2">
+        <thead>
+          <tr>
+              <th data-field="name">Name</th>
+              <th data-field="phone">Telephone</th>
+              <th data-field="email">Email</th>
+              <th data-field="address">Address</th>
+              <th data-field="notes">Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat='contact in contacts track by $index'>
+            <td>{{contact.name}}</td>
+            <td>{{contact.phone}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.address}}</td>
+            <td>{{contact.note}}</td>
+            <td>
+              <button ng-click='editContact(contact)' class="waves-effect waves-light btn modal-trigger2" href="#modal2"><i class="material-icons center">edit</i></button>
+              <button class="modal-trigger3 waves-effect waves-light btn" ng-click='delContact(contact)'><i class="material-icons center">delete</i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+
+  <div class="container">
+    <div id="modal1" class="modal blue-grey">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col s12 m12">
+            <div class="card blue-grey darken-1 z-depth-4">
+              <div class="card-content white-text">
+                <span class="card-title">Add Contact</span>
+                <div class="row">
+                  <div class="row">
+                   <form class="col s12">
+                     <div class="row">
+                       <div class="input-field col s6">
+                         <i class="material-icons prefix">account_circle</i>
+                         <input id="icon_prefix" type="text" class="validate" placeholder="Name"ng-model="newContact.name">
+                       </div>
+                       <div class="input-field col s6">
+                         <i class="material-icons prefix">phone</i>
+                         <input id="icon_telephone" type="tel" class="validate" placeholder="Telephone"ng-model="newContact.phone">
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">email</i>
+                         <input id="icon_prefix" type="text" class="validate" placeholder="Email"ng-model="newContact.email">
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">home</i>
+                         <input id="icon_prefix" type="text" class="validate" placeholder="Address"ng-model="newContact.address">
+                       </div>
+                     </div>
+                     <div class="row">
+                       <div class="input-field col s12">
+                         <i class="material-icons prefix">notes</i>
+                         <input id="icon_prefix" type="text" class="validate" placeholder="Notes"ng-model="newContact.note">
+                       </div>
+                     </div>
+                   </form>
+                 </div>
+              </div>
+              <div class="card-action">
+                <a href="#" class="modal-action modal-close">Cancel</a>
+                <a href="#" class="modal-action modal-close" ng-click="addContact()">Add</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
